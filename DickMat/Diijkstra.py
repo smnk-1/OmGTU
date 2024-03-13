@@ -64,4 +64,4 @@ while True:
         break
     
 print('result:')
-print(minDistances)
+print(minDistances[finish])
