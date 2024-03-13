@@ -10,25 +10,27 @@ finish = 5
 s = [start]
 minDistances = {start:0}
 ind = 0
+finalUs = []
+finalWs = []
 
 used = [1]
 for i in range(len(U)):
     if U[i][0] == start:
         minDistances[U[i][1]] = W[i]
         used.append(U[i][1])
-print(minDistances)
-print(used)
+#print(minDistances)
+#print(used)
 for i in Us:
     if used.count(i)==0:
         minDistances[i] = float('inf')
 
 while True:
-    print(s)
-    print(minDistances)
+    #print(s)
+    #print(minDistances)
     
     currentElement = s[ind]
-    print("current: ", end='')
-    print(currentElement)
+    #print("current: ", end='')
+    #print(currentElement)
     possibleUs = []
     possibleWeights = []
     
@@ -37,15 +39,15 @@ while True:
             possibleUs.append(U[i][1])
             possibleWeights.append(W[i])
             
-    print("possible: ", end='')
-    print(possibleUs, end=', ')
-    print(possibleWeights)
+    # print("possible: ", end='')
+    # print(possibleUs, end=', ')
+    # print(possibleWeights)
     
     for i in possibleUs:
         if s.count(i) == 0:
-            print(i, end=' =>')
+            # print(i, end=' =>')
             value = min(minDistances[i], minDistances[currentElement] + possibleWeights[possibleUs.index(i)])
-            print(value)
+            # print(value)
             minDistances[i] = value
 
     minW = float('inf')
@@ -54,14 +56,25 @@ while True:
             if value < minW:
                 minW = value
                 minU = key
-    
+    finalUs.append(minU)
+    finalWs.append(minW)
     if minU != finish:
         s.append(minU)
         ind += 1
-        print(' ')
+        # print(' ')
     else:
         minDistances[minU] = (minDistances[minU] + possibleWeights.index(min(possibleWeights)))
         break
     
 print('result:')
-print(minDistances[finish])
+result = minDistances[finish]
+print(result)
+print(finalUs, finalWs)
+print(minDistances)
+
+way = 0
+for i in range(len(finalWs)-1, -1, -1):
+    for key, value in minDistances.items():
+        if value == finalWs[i] and way < result:
+            print(key)
+            way += result-value
