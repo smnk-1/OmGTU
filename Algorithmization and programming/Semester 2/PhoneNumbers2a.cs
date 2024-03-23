@@ -41,7 +41,7 @@ namespace PhoneNubmersTask2
         static void Main(string[] args)
         {
             List<Abonent> abonents = new List<Abonent>();
-            Console.WriteLine("Type: number(from)_number(to)_dd.mm_000lenght or END");
+            Console.WriteLine("Type: number(from)_number(to)_dd.mm_lenght or END");
             while (true)
             {
                 string[] input = Console.ReadLine().Split();
